@@ -3,16 +3,11 @@ header.innerHTML="List Breweries"
 header.className="titlename"
 document.body.append(header)
 
+fetch('https://api.openbrewerydb.org/breweries')
+.then(data=>data.json())
+.then(brewery => loadbrewery(brewery))
 
-const xhr = new XMLHttpRequest();
-const url = 'https://api.openbrewerydb.org/breweries';
-
-xhr.responseType = 'json';
-xhr.onreadystatechange = function() {
-  if (xhr.readyState === XMLHttpRequest.DONE) 
-  {
-    var brewery = xhr.response;
-  }
+function loadbrewery(brewery){
   const breweriesList = document.createElement("div");
   breweriesList.className="listdiv";
 
@@ -34,6 +29,3 @@ xhr.onreadystatechange = function() {
 
 document.body.append(breweriesList);
 };
-xhr.open('GET', url);
-xhr.send();
-
